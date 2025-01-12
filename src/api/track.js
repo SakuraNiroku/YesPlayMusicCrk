@@ -11,17 +11,19 @@ import {
 import axios from 'axios';
 import keypro from '@/keypro';
 
-async function fakePromise(response,fee) {
-  console.log(fee)
-  if(fee != 1){return response}
-  const ax = axios.create()
+async function fakePromise(response, fee) {
+  console.log(fee);
+  if (fee != 1) {
+    return response;
+  }
+  const ax = axios.create();
   return ax({
-    url:`https://proxy.23312355.xyz/https://api.xingzhige.com/API/NetEase_CloudMusic_new/?songid=${response.data[0].id}&key=${keypro.key}`
-  }).then(res=>{
-    console.log(res)
-    response.data[0].url = res.data.data.src
-    return response
-  })
+    url: `https://proxy.23312355.xyz/https://api.xingzhige.com/API/NetEase_CloudMusic_new/?songid=${response.data[0].id}&key=${keypro.key}`,
+  }).then(res => {
+    console.log(res);
+    response.data[0].url = res.data.data.src;
+    return response;
+  });
 }
 
 /**
@@ -31,7 +33,7 @@ async function fakePromise(response,fee) {
  * @param {string} id - 音乐的 id，例如 id=405998841,33894312
  */
 
-export async function getMP3(id,fee) {
+export async function getMP3(id, fee) {
   const getBr = () => {
     // 当返回的 quality >= 400000时，就会优先返回 hi-res
     const quality = store.state.settings?.musicQuality ?? '320000';
@@ -45,7 +47,7 @@ export async function getMP3(id,fee) {
       br: getBr(),
     },
   });
-  return fakePromise(response,fee)
+  return fakePromise(response, fee);
 }
 
 /**
@@ -64,8 +66,8 @@ export function getTrackDetail(ids) {
     }).then(data => {
       data.songs.map(song => {
         const privileges = data.privileges.find(t => t.id === song.id);
-        if(privileges.fee === 1){
-          privileges.pl = 1
+        if (privileges.fee === 1) {
+          privileges.pl = 1;
         }
         cacheTrackDetail(song, privileges);
       });

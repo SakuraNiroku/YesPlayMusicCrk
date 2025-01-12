@@ -33,7 +33,15 @@
     <div class="title-and-artist">
       <div class="container">
         <div class="title">
-          {{ track.name }} <span v-if="(isAlbum || isPlaylist) && fee === 1"><a href="https://api.xingzhige.com" style="color: red;" target="_blank">Crk by Hikari,星之阁</a></span>
+          {{ track.name }}
+          <span v-if="(isAlbum || isPlaylist) && fee === 1"
+            ><a
+              href="https://api.xingzhige.com"
+              style="color: red"
+              target="_blank"
+              >Crk by Hikari,星之阁</a
+            ></span
+          >
           <span v-if="isSubTitle" :title="subTitle" class="sub-title">
             ({{ subTitle }})
           </span>
