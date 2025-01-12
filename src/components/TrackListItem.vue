@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable -->
   <div
     class="track"
     :class="trackClass"
@@ -32,7 +33,7 @@
     <div class="title-and-artist">
       <div class="container">
         <div class="title">
-          {{ track.name }}
+          {{ track.name }} <span v-if="(isAlbum || isPlaylist) && fee === 1"><a href="https://api.xingzhige.com" style="color: red;" target="_blank">Crk by Hikari,星之阁</a></span>
           <span v-if="isSubTitle" :title="subTitle" class="sub-title">
             ({{ subTitle }})
           </span>
@@ -118,6 +119,9 @@ export default {
     },
     playable() {
       return this.track?.privilege?.pl > 0 || this.track?.playable;
+    },
+    fee() {
+      return this.track?.privilege?.fee || 0;
     },
     imgUrl() {
       let image =

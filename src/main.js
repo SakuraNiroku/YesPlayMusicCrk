@@ -11,6 +11,8 @@ import { dailyTask } from '@/utils/common';
 import '@/assets/css/global.scss';
 import NProgress from 'nprogress';
 import '@/assets/css/nprogress.css';
+import 'vue2-toast/lib/toast.css';
+import Toast from 'vue2-toast';
 
 window.resetApp = () => {
   localStorage.clear();
@@ -36,6 +38,7 @@ Vue.use(
   router
 );
 Vue.config.productionTip = false;
+Vue.use(Toast);
 
 NProgress.configure({ showSpinner: false, trickleSpeed: 100 });
 dailyTask();

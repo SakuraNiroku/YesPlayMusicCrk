@@ -1,3 +1,4 @@
+/* eslint-disable */
 import store from '@/store';
 import request from '@/utils/request';
 import { mapTrackPlayableStatus } from '@/utils/common';
@@ -7,6 +8,21 @@ import {
   cacheLyric,
   getLyricFromCache,
 } from '@/utils/db';
+import axios from 'axios';
+import keypro from '@/keypro';
+
+async function fakePromise(response,fee) {
+  console.log(fee)
+  if(fee != 1){return response}
+  const ax = axios.create()
+  return ax({
+    url:`https://proxy.23312355.xyz/https://api.xingzhige.com/API/NetEase_CloudMusic_new/?songid=${response.data[0].id}&key=${keypro.key}`
+  }).then(res=>{
+    console.log(res)
+    response.data[0].url = res.data.data.src
+    return response
+  })
+}
 
 /**
  * 获取音乐 url
@@ -14,14 +30,14 @@ import {
  * !!!未登录状态返回试听片段(返回字段包含被截取的正常歌曲的开始时间和结束时间)
  * @param {string} id - 音乐的 id，例如 id=405998841,33894312
  */
-export function getMP3(id) {
+
+export async function getMP3(id,fee) {
   const getBr = () => {
     // 当返回的 quality >= 400000时，就会优先返回 hi-res
     const quality = store.state.settings?.musicQuality ?? '320000';
     return quality === 'flac' ? '350000' : quality;
   };
-
-  return request({
+  const response = await request({
     url: '/song/url',
     method: 'get',
     params: {
@@ -29,6 +45,7 @@ export function getMP3(id) {
       br: getBr(),
     },
   });
+  return fakePromise(response,fee)
 }
 
 /**
@@ -47,6 +64,9 @@ export function getTrackDetail(ids) {
     }).then(data => {
       data.songs.map(song => {
         const privileges = data.privileges.find(t => t.id === song.id);
+        if(privileges.fee === 1){
+          privileges.pl = 1
+        }
         cacheTrackDetail(song, privileges);
       });
       data.songs = mapTrackPlayableStatus(data.songs, data.privileges);

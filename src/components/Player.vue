@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable -->
   <div class="player" @click="toggleLyrics">
     <div
       class="progress-bar"
@@ -35,7 +36,7 @@
               :class="['name', { 'has-list': hasList() }]"
               @click="hasList() && goToList()"
             >
-              {{ currentTrack.name }}
+              {{ currentTrack.name }} <span style="color: red;" v-if="currentTrack.fee === 1"><a href="https://api.xingzhige.com" target="_blank">Crk by Hikari,星之阁</a></span>
             </div>
             <div class="artist">
               <span

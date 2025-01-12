@@ -395,21 +395,20 @@ export default class {
   }
   _getAudioSourceFromNetease(track) {
     if (isAccountLoggedIn()) {
-      return getMP3(track.id).then(result => {
-        if (!result.data[0]) return null;
-        if (!result.data[0].url) return null;
-        if (result.data[0].freeTrialInfo !== null) return null; // 跳过只能试听的歌曲
-        const source = result.data[0].url.replace(/^http:/, 'https:');
-        if (store.state.settings.automaticallyCacheSongs) {
-          cacheTrackSource(track, source, result.data[0].br);
-        }
-        return source;
-      });
+      console.log();
     } else {
-      return new Promise(resolve => {
-        resolve(`https://music.163.com/song/media/outer/url?id=${track.id}`);
-      });
+      console.log();
     }
+    return getMP3(track.id, track.fee).then(result => {
+      if (!result.data[0]) return null;
+      if (!result.data[0].url) return null;
+      // if (result.data[0].freeTrialInfo !== null) return null; // 跳过只能试听的歌曲
+      const source = result.data[0].url.replace(/^http:/, 'https:');
+      if (store.state.settings.automaticallyCacheSongs) {
+        cacheTrackSource(track, source, result.data[0].br);
+      }
+      return source;
+    });
   }
   async _getAudioSourceFromUnblockMusic(track) {
     console.debug(`[debug][Player.js] _getAudioSourceFromUnblockMusic`);
