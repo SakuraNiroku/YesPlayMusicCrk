@@ -39,7 +39,7 @@
               {{ currentTrack.name }}
               <span style="color: red" v-if="currentTrack.fee === 1"
                 ><a href="https://api.xingzhige.com" target="_blank"
-                  >Crk by Hikari,星之阁</a
+                  >VIP</a
                 ></span
               >
             </div>

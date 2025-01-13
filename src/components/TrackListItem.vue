@@ -39,7 +39,7 @@
               href="https://api.xingzhige.com"
               style="color: red"
               target="_blank"
-              >Crk by Hikari,星之阁</a
+              >VIP</a
             ></span
           >
           <span v-if="isSubTitle" :title="subTitle" class="sub-title">

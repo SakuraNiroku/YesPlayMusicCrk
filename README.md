@@ -1,13 +1,6 @@
 # Oops! 这里是由Hikari Crk的YesPlayMusic，内部使用星之阁API
 [星之阁](https://api.xingzhige.com)
-## 使用前请在src/里创建keypro.js，内容为：
-```
-/*eslint-disable*/
-export default {
-    key: '你的星之阁key',
-}
-```
-
+## 请创建一个环境变量 VUE_APP_NETEASE_API，value写星之阁的key就行
 <br />
 <p align="center">
   <a href="https://music.qier222.com" target="blank">
