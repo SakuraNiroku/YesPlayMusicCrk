@@ -22,7 +22,7 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
-#.vercel
+.vercel
 
 #Electron-builder output
 /dist_electron
@@ -31,7 +31,7 @@ NeteaseCloudMusicApi-master.zip
 
 # Local Netlify folder
 .netlify
-vercel.json
+#vercel.json
 # Devenv
 .devenv*
 devenv.local.nix
