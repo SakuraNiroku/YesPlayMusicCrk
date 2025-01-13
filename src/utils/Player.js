@@ -399,6 +399,11 @@ export default class {
     } else {
       console.log();
     }
+    if (track.fee != 1) {
+      return new Promise(resolve => {
+        resolve(`https://music.163.com/song/media/outer/url?id=${track.id}`);
+      });
+    }
     return getMP3(track.id, track.fee).then(result => {
       if (!result.data[0]) return null;
       if (!result.data[0].url) return null;
