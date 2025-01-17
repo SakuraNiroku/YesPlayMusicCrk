@@ -16,7 +16,7 @@ async function fakePromise(response, fee) {
   }
   const ax = axios.create();
   return ax({
-    url: `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?songid=${response.data[0].id}&key=${process.env.VUE_APP_NETEASE_API}`,
+    url: `https://proxy.23312355.xyz/https://api.xingzhige.com/API/NetEase_CloudMusic_new/?songid=${response.data[0].id}&key=${process.env.VUE_APP_NETEASE_API}`,
   }).then(res => {
     console.log(res);
     response.data[0].url = res.data.data.src;
