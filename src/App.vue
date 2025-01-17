@@ -82,7 +82,7 @@ export default {
     this.fetchData();
   },
   mounted() {
-    this.$toast('Crk by Hikari，API提供：星之阁');
+    //this.$toast('Crk by Hikari，API提供：星之阁');
   },
   methods: {
     handleKeydown(e) {
